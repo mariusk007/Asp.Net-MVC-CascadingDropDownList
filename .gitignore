@@ -3,3 +3,10 @@
 ################################################################################
 
 /packages
+/.vs
+/NorthwindCoModels/bin/Debug
+/NorthwindCoModels/obj
+/NorthwindCoViewModels/bin/Debug
+/NorthwindCoViewModels/obj
+/NorthwindCoWeb/bin
+/NorthwindCoWeb/obj
