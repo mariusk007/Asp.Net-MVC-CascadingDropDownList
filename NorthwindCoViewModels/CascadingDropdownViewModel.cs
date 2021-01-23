@@ -56,7 +56,7 @@ namespace NorthwindCoViewModels
             state = new State { Id = 6, Description = "Pernambuco", CountryId = 2 };
             model.AllStates.Add(state);
 
-            var town = new Town { Id = 1, Description = "Berrara", StateId = 1};
+           var town = new Town { Id = 1, Description = "Berrara", StateId = 1 };
             model.AllTowns.Add(town);
 
             town = new Town { Id = 2, Description = "Cawongla", StateId = 1 };
@@ -66,6 +66,12 @@ namespace NorthwindCoViewModels
             model.AllTowns.Add(town);
 
             town = new Town { Id = 4, Description = "Kikoira", StateId = 1 };
+            model.AllTowns.Add(town);
+
+            town = new Town { Id = 5, Description = "Lauro de Freitas", StateId = 5 };
+            model.AllTowns.Add(town);
+
+            town = new Town { Id = 6, Description = "Olinda", StateId = 6 };
             model.AllTowns.Add(town);
 
             return model;
