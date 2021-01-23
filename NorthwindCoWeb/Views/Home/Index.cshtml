@@ -6,25 +6,23 @@
 	{
 		Value = item.Id.ToString(),
 		Text = item.Description.ToString()
-	}), new { @class = "form-control" })
+	}), new {@class = "form-control"})
 </div>
 <div>
 	<label class="control-label">States</label>
 	@Html.DropDownList("StateId", Model.AllStates.Select(item => new SelectListItem
 	{
 		Value = item.Id.ToString(),
-		Text = item.Description.ToString(),
-		Selected = "select" == item.Id.ToString()
-	}), new { @class = "form-control" })
+		Text = item.Description.ToString()
+	}), new {@class = "form-control"})
 </div>
 <div>
 	<label class="control-label">Towns</label>
 	@Html.DropDownList("TownId", Model.AllTowns.Select(item => new SelectListItem
 	{
 		Value = item.Id.ToString(),
-		Text = item.Description.ToString(),
-		Selected = "select" == item.Id.ToString()
-	}), new { @class = "form-control" })
+		Text = item.Description.ToString()
+	}), new {@class = "form-control"})
 </div>
 
 @section scripts
@@ -34,7 +32,6 @@
 
 			$('#CountryId').change(function() {
 				$('#CountryId').val($('#CountryId').val());
-
 				loadState($('#CountryId').val());
 			});
 
@@ -49,8 +46,31 @@
 
 			function loadState(selectedValue) {
 
+				var defaultValue = 0;
+
 				$.getJSON("/Home/LoadStateList/" + selectedValue,
 					function(data) {
+						var items = "";
+
+						$.each(data,
+							function(index, item) {
+								if (index === 0) {
+									defaultValue = item.Value;
+								}
+								items += "<option value='" + item.Value + "'>" + item.Text + "</option>";
+							});
+
+						$("#StateId").html(items);
+
+						loadTown(defaultValue);
+					});
+			}
+
+			function loadTown(selectedValue) {
+
+				$.getJSON("/Home/LoadTownList/" + selectedValue,
+					function(data) {
+
 						var items = "";
 
 						$.each(data,
@@ -58,28 +78,7 @@
 								items += "<option value='" + item.Value + "'>" + item.Text + "</option>";
 							});
 
-						$("#StateId").html(items);
-						$("#StateId").val(selectedValue);
-
-						loadTown(selectedValue);
-
-					});
-			}
-
-			function loadTown(selectedValue) {
-
-				$.getJSON("/Home/LoadTownList/" + selectedValue,
-					function (data) {
-
-						var items = "";
-
-						$.each(data,
-							function (index, item) {
-								items += "<option value='" + item.Value + "'>" + item.Text + "</option>";
-							});
-
 						$("#TownId").html(items);
-						$('#TownId').val(selectedValue);
 					});
 			}
 

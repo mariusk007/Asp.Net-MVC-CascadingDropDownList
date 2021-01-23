@@ -50,6 +50,12 @@ namespace NorthwindCoViewModels
             state = new State { Id = 4, Description = "South Australia", CountryId = 1 };
             model.AllStates.Add(state);
 
+            state = new State { Id = 5, Description = "Bahia", CountryId = 2 };
+            model.AllStates.Add(state);
+
+            state = new State { Id = 6, Description = "Pernambuco", CountryId = 2 };
+            model.AllStates.Add(state);
+
             var town = new Town { Id = 1, Description = "Berrara", StateId = 1};
             model.AllTowns.Add(town);
 
