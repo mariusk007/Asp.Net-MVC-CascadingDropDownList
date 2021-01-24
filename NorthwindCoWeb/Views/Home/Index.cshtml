@@ -1,46 +1,64 @@
 ﻿@model NorthwindCoViewModels.CascadingDropdownViewModel
 
-<div>
-	<label>Countries</label>
-	@Html.DropDownList("CountryId", Model.AllCountries.Select(item => new SelectListItem
-	{
-		Value = item.Id.ToString(),
-		Text = item.Description.ToString()
-	}), new {@class = "form-control"})
-</div>
-<div>
-	<label class="control-label">States</label>
-	@Html.DropDownList("StateId", Model.AllStates.Select(item => new SelectListItem
-	{
-		Value = item.Id.ToString(),
-		Text = item.Description.ToString()
-	}), new {@class = "form-control"})
-</div>
-<div>
-	<label class="control-label">Towns</label>
-	@Html.DropDownList("TownId", Model.AllTowns.Select(item => new SelectListItem
-	{
-		Value = item.Id.ToString(),
-		Text = item.Description.ToString()
-	}), new {@class = "form-control"})
+<style>
+
+	.center-screen {
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		margin-right: -50%;
+		transform: translate(-50%, -50%);
+	}
+
+	.ddlwidth {
+		width: 400px
+	}
+
+</style>
+
+<div class="center-screen">
+	<div class="ddlwidth">
+		<label class="control-label">Countries</label>
+		@Html.DropDownList("CountryId", Model.AllCountries.Select(item => new SelectListItem
+		{
+			Value = item.Id.ToString(),
+			Text = item.Description.ToString()
+		}), new { @class = "form-control" })
+	</div>
+	<div>
+		<label class="control-label">States</label>
+		@Html.DropDownList("StateId", Model.AllStates.Select(item => new SelectListItem
+		{
+			Value = item.Id.ToString(),
+			Text = item.Description.ToString()
+		}), new { @class = "form-control" })
+	</div>
+	<div>
+		<label class="control-label">Towns</label>
+		@Html.DropDownList("TownId", Model.AllTowns.Select(item => new SelectListItem
+		{
+			Value = item.Id.ToString(),
+			Text = item.Description.ToString()
+		}), new { @class = "form-control" })
+	</div>
 </div>
 
 @section scripts
 {
 	<script>
-		$(function() {
+		$(function () {
 
-			$('#CountryId').change(function() {
+			$('#CountryId').change(function () {
 				$('#CountryId').val($('#CountryId').val());
 				loadState($('#CountryId').val());
 			});
 
-			$('#StateId').change(function() {
+			$('#StateId').change(function () {
 				$('#StateId').val($('#StateId').val());
 				loadTown($('#StateId').val());
 			});
 
-			$('#TownId').change(function() {
+			$('#TownId').change(function () {
 				$('#TownId').val($('#TownId').val());
 			});
 
@@ -49,11 +67,11 @@
 				var defaultValue = 0;
 
 				$.getJSON("/Home/LoadStateList/" + selectedValue,
-					function(data) {
+					function (data) {
 						var items = "";
 
 						$.each(data,
-							function(index, item) {
+							function (index, item) {
 								if (index === 0) {
 									defaultValue = item.Value;
 								}
@@ -69,12 +87,12 @@
 			function loadTown(selectedValue) {
 
 				$.getJSON("/Home/LoadTownList/" + selectedValue,
-					function(data) {
+					function (data) {
 
 						var items = "";
 
 						$.each(data,
-							function(index, item) {
+							function (index, item) {
 								items += "<option value='" + item.Value + "'>" + item.Text + "</option>";
 							});
 
